@@ -6,6 +6,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.librarymanagementtest.com.librarymanagement.Model.Book;
 import com.librarymanagementtest.com.librarymanagement.Service.BookService;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 public class BookController {
 
+    @Autowired
     private BookService bookService;
-
-    public BookController(BookService bookService)
-    {
-        this.bookService = bookService;
-    }
 
     @GetMapping("/api/books")
     public  Iterable<Book> getAllBooks() {
@@ -34,12 +31,12 @@ public class BookController {
     }
 
     @GetMapping("/api/books/{id}")
-    public Book getMethodName(@PathVariable int id) {
+    public Book getBookById(@PathVariable long id) {
         return bookService.getBookById(id);
     }
 
     @PostMapping("/api/books")
-    //retuns added book Id 
+    //retuns added book
     public Book addBook(@RequestParam("bookData") Book book)
     {
         return bookService.save(book);
