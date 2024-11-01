@@ -1,11 +1,14 @@
 package com.librarymanagementtest.com.librarymanagement.Model;
 import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-
+@Entity
 @Table(name = "Book")
 public class Book {
 
@@ -13,15 +16,16 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
     private String title, author, ISBN;
 
-    private LocalDateTime publicationYear, creationTime;
+    @Column(nullable = false)
+    private LocalDateTime publicationYear;
+
+    private LocalDateTime creationTime =  LocalDateTime.now();
 
     public Book()
     {
-        id = -1;
-        title = author = ISBN = "";
-        publicationYear = creationTime = null;
     }
 
     public LocalDateTime getCreationTime() {

@@ -1,5 +1,8 @@
 package com.librarymanagementtest.com.librarymanagement.Service;
 import com.librarymanagementtest.com.librarymanagement.Repository.PatronRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.librarymanagementtest.com.librarymanagement.Model.Patron;
 
 import java.util.Optional;
@@ -28,22 +31,25 @@ public class PatronService {
         return patronNullable.get();
     }
 
+    @Transactional
     public Patron save(Patron patron) {
 
         return patronsRepository.save(patron);
     }
 
+    @Transactional
     public Patron updatePatron(long id, Patron patron) {
         patron.setId(id);
         return patronsRepository.save(patron);
     }
 
+    @Transactional
     public Patron removePatron(long id) {
         
         Optional<Patron> patronAboutToBeDeleted = patronsRepository.findById(id);
         if(!patronAboutToBeDeleted.isPresent())
         {
-            return new Patron();
+            return null;
         }
         patronsRepository.deleteById(id);
         return patronAboutToBeDeleted.get();

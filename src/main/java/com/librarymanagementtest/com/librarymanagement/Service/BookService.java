@@ -1,6 +1,9 @@
 package com.librarymanagementtest.com.librarymanagement.Service;
 
 import com.librarymanagementtest.com.librarymanagement.Repository.BooksRepository;
+
+import jakarta.transaction.Transactional;
+
 import com.librarymanagementtest.com.librarymanagement.Model.Book;
 
 import java.util.Optional;
@@ -29,22 +32,25 @@ public class BookService {
         return bookNullable.get();
     }
 
+    @Transactional
     public Book save(Book book) {
 
         return booksRepository.save(book);
     }
 
+    @Transactional
     public Book updateBook(long id, Book book) {
         book.setId(id);
         return booksRepository.save(book);
     }
 
+    @Transactional
     public Book removeBook(long id) {
         
         Optional<Book> bookAboutToBeDeleted = booksRepository.findById(id);
         if(!bookAboutToBeDeleted.isPresent())
         {
-            return new Book();
+            return null;
         }
         booksRepository.deleteById(id);
         return bookAboutToBeDeleted.get();

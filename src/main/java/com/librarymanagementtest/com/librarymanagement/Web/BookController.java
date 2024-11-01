@@ -53,7 +53,7 @@ public class BookController {
     {
         Book removed = bookService.removeBook(id);
         //essentially id did not find any book with such id 
-        if(removed.getId() == -1) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if(removed == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         
         return removed;
     }

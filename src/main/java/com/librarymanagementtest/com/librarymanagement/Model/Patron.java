@@ -1,11 +1,13 @@
 package com.librarymanagementtest.com.librarymanagement.Model;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@Entity
 @Table(name = "Patron")
 public class Patron {
 
@@ -15,14 +17,10 @@ public class Patron {
 
     private String name, email, phone_number;
 
-    private LocalDateTime creationTime;
+    private LocalDateTime creationTime = LocalDateTime.now();
 
     public Patron()
     {
-        id = -1;
-        name = email = phone_number;
-
-        creationTime = null;
     }
 
     public LocalDateTime getCreationTime() {
