@@ -1,4 +1,5 @@
 to run this app:
+
     1- you should have gradle installed on your device as well as JDK 23(insure there paths are added to the PATH system environment variable)
 
     2- install Extension Pack for java in the extensions of Visual studio code.
